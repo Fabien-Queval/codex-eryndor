@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Codex Eryndor — Le codex vivant{% endblock %}
+
+{% block body %}
+<section class="hero">
+    <h2 class="hero-title">Eryndor vous attend</h2>
+    <p class="hero-sub">Le Vaste Dehors n'a pas de mémoire. Vous, si.</p>
+    <nav class="hero-actions">
+        <a href="{{ path('app_codex') }}" class="btn-primary">Ouvrir le Codex</a>
+        <a href="{{ path('app_map') }}" class="btn-secondary">Explorer la Carte</a>
+    </nav>
+</section>
+{% endblock %}
