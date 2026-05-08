@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Codex Eryndor JDR{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🦊</text></svg>">
+
+        {# Polices Google Fonts — Cinzel (titres) + Manrope (corps) #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+
+        {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -13,12 +19,31 @@
 
         {% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
         {% if frankenphpHotReload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+            <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
+            <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="page-shell">
+        <header class="app-bar">
+            <div class="app-bar-brand">
+                <span class="eyebrow">Codex Eryndor</span>
+                <h1>Le codex vivant</h1>
+            </div>
+            <p class="app-bar-tagline">chercher · ouvrir une fiche · explorer la carte · tracer la constellation</p>
+        </header>
+
+        <nav class="tab-row" role="tablist" aria-label="Navigation principale">
+            <a href="{{ path('app_home') }}" class="tab-button" role="tab">Accueil</a>
+            <a href="{{ path('app_codex') }}" class="tab-button" role="tab">Codex</a>
+            <a href="{{ path('app_map') }}" class="tab-button" role="tab">Carte</a>
+            <a href="{{ path('app_constellation') }}" class="tab-button" role="tab">Constellation</a>
+        </nav>
+
+        <main class="view-stack">
+            {% block body %}{% endblock %}
+        </main>
+    </div>
     </body>
 </html>
